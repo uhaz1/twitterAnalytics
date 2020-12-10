@@ -120,6 +120,25 @@ wordcloud(words = bag.df$word, freq = bag.df$freq, min.freq = 5,max.words=1500, 
 ####### CLUSTERING -Kmeans #######
 ##################################
 
+options(stringsAsFactors = FALSE)
+
+#remove superfluous words
+sparse = removeSparseTerms(dtm , 0.999)
+sparse
+
+M <- as.matrix(sparse)
+head(M)
+df2 <- as.data.frame(as.matrix(sparse))
+dim(df2)
+head(df2)
+
+# Plot frequent terms
+freq <- colSums(M)
+print(freq)
+freq <- subset(freq, freq>=5)
+print(sort(freq, decreasing = T))
+barplot(freq)
+
 # Determine number of clusters
 wss <- 1:14
 
